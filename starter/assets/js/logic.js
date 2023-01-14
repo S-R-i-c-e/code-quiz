@@ -3,12 +3,14 @@ const startButton = document.querySelector("#start");
 const startScreen = document.querySelector("#start-screen");
 const quizScreen = document.querySelector("#quiz-screen");
 const questionEl = document.querySelector("#question-title");
-const answerOne = document.querySelector("#answerOne");
-const answerTwo = document.querySelector("#answerTwo");
-const answerThree = document.querySelector("#answerThree");
-const answerFour = document.querySelector("#answerFour");
+const answerList = document.querySelector("#answer-list");
+const scoreEl = document.querySelector("#score");
 
 const quiz = codeQuestions;
+
+let score = 0;
+let timer = 0;
+
 
 // EVENT LISTENERS
 // ready, steady, GO!
@@ -20,7 +22,10 @@ startButton.addEventListener("click", function(event) {
 // listen to the displayed answers
 quizScreen.addEventListener("click", function(event) {
     if (event.target.className === "answer") {
-        console.log(checkAnswer(event.target.textContent));
+        if (isAnswerCorrect(event.target.textContent)) {
+            incrementScore();
+        };
+        askQuestion();
     }   
 });
 
@@ -48,9 +53,7 @@ function getRandomIndex(length) {
 function shuffleArray(anArray) {
     for (index=0; index<anArray.length; index++) {
         let randomIndex = getRandomIndex(anArray.length);
-        console.log("index = " + index + " randomIndex = " + randomIndex);
         [anArray[index], anArray[randomIndex]] = [anArray[randomIndex], anArray[index]];
-        console.log(anArray);
     }
     return anArray;
 }
@@ -65,14 +68,22 @@ function mixAnswers(questionObject) {
  function showQuestion(question) {
     quizScreen.setAttribute("correctAnswer", question.answer);
     questionEl.textContent = question.question;
+    answerElements = answerList.children;
     answerArray = mixAnswers(question);
-    answerOne.textContent = answerArray[0];
-    answerTwo.textContent = answerArray[1];
-    answerThree.textContent = answerArray[2];
-    answerFour.textContent = answerArray[3];
+    for (index=0; index < answerElements.length; index++) {
+        answerElements[index].textContent = answerArray[index];
+    }
  }
 
- function checkAnswer(answer) {
+ function isAnswerCorrect(answer) {
+    // TODO supposed to be using data-
     return (quizScreen.getAttribute("correctAnswer") === answer);
  }
  
+ function displayScore() {
+    scoreEl.textContent = score;
+ }
+ function incrementScore() {
+    score += 1;
+    displayScore();
+ }
