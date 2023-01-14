@@ -16,11 +16,12 @@ startButton.addEventListener("click", function(event) {
     startScreen.setAttribute("class", "hide");
     startTheQuiz();
 });
+
 quizScreen.addEventListener("click", function(event) {
-    console.log("quiz screen clicked");
-    console.log(event.target.className);
-    
-})
+    if (event.target.className === "answer") {
+        console.log(checkAnswer(event.target.textContent));
+    }   
+});
 
 function startTheQuiz() {
     quizScreen.setAttribute("class", "start");
@@ -36,6 +37,8 @@ function chooseQuestion() {
     return quiz[0];
 }
  function showQuestion(question) {
+    quizScreen.setAttribute("correctAnswer", question.answer);
+    console.log("quizScreen.value" + quizScreen.getAttribute("correctAnswer"));
     questionEl.textContent = question.question;
     answerOne.textContent = question.answer;
     answerTwo.textContent = question.dummy1;
@@ -43,10 +46,6 @@ function chooseQuestion() {
     answerFour.textContent = question.dummy3;
  }
 
-// createQuestionCard: create HTML question card and return its tag
-function createQuestionCard(question) {
-    let questionCardTag = document.createElement("div");
-    questionCardTag.appendChild(createTextElement(question.question));
-    questionCardTag.textContent = question.question;
-    return questionCardTag
-}
+ function checkAnswer(answer) {
+    return (quizScreen.getAttribute("correctAnswer") === answer);
+ }
