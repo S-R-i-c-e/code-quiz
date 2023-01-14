@@ -1,0 +1,54 @@
+<html>
+<header>
+    hi-score button -- timer
+</header>
+<body>
+    intro text
+    quiz
+    final score
+</body>
+<footer>
+    current score
+</footer>
+
+start_buttton_event
+    start
+
+start
+    start_timer - set countdown - timer zero event
+    set_quiz_display - remove_intro_text - quiz display ongoing until timer end
+    set_quiz
+    question_event
+
+question_event
+    show_question
+
+show_question
+    choose_question - record as shown
+    set_up_question_html
+
+timer_zero
+    undisplay_quiz
+    display_finish
+
+timer_second_less
+    timer display update(-1)
+
+answer
+    test_answer
+    correct or incorrect
+    question_event
+
+incorrect
+    timer display(penalty)
+
+correct
+    score(1)
+
+---------------------------------------------------
+
+1) start screen
+    start button
+
+
+?? Custom eventso add a listener to 
