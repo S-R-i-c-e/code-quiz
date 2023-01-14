@@ -38,19 +38,21 @@ input[type="text"] {
   font-size: 100%;
 }
 
-ol {
+ul {
   padding-left: 0px;
   max-height: 400px;
   overflow: auto;
 }
 
 li {
+  border: 1px solid black;
   padding: 5px;
-  list-style: decimal inside none;
+  list-style: none;
+  width: 50%;
 }
 
-li:nth-child(odd) {
-  background-color: #f3edfc;
+li:hover {
+  background-color: #8570a5;
 }
 
 .wrapper {
@@ -62,6 +64,13 @@ li:nth-child(odd) {
   display: none;
 }
 
+#quiz-screen {
+  align-content: center;
+  background-color: #8570a5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
 .start {
   text-align: center;
 }

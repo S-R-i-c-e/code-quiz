@@ -33,5 +33,11 @@ const codeQuestions = [
         dummy1: "yield",
         dummy2: "case",
         dummy3: "var"
+    },
+    {   question: "RegExp: Which string is not matched by /e.n/ ?",
+        answer: "Emmentel",
+        dummy1: "rennet",
+        dummy2: "toe nails",
+        dummy3: "sturgeon"
     }
 ]

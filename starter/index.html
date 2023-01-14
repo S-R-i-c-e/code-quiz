@@ -13,7 +13,7 @@
     <div class="scores"><a href="highscores.html">View Highscores</a></div>
 
     <div class="timer">Time: <span id="time">0</span></div>
-
+  
     <div class="wrapper">
       <div id="start-screen" class="start">
         <h1>Coding Quiz Challenge</h1>
@@ -24,14 +24,15 @@
         </p>
         <button id="start">Start Quiz</button>
       </div>
-
+      <hr>
       <div id="quiz-screen" class="hide">
-        <p id="question-title"></p>
-          <p class="answer"  id="answerOne"></p>
-          <p class="answer" id="answerTwo"></p>
-          <p class="answer" id="answerThree"></p>
-          <p class="answer" id="answerFour"></p>
-        </div>
+        <h2 id="question-title"></h2>
+        <ul id="answer-list">
+          <li class="answer"  id="answerOne"></li>
+          <li class="answer" id="answerTwo"></li>
+          <li class="answer" id="answerThree"></li>
+          <li class="answer" id="answerFour"></li>
+        </ul>
       </div>
 
       <div id="end-screen" class="hide">
@@ -45,7 +46,7 @@
 
       <div id="feedback" class="feedback hide"></div>
     </div>
-
+    <footer class="score">SCORE: <span id="score">0</span></footer>
     <script src="./assets/js/questions.js"></script>
     <script src="./assets/js/logic.js"></script>
   </body>

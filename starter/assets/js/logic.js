@@ -1,5 +1,4 @@
-/* start button starts quiz
-*/
+
 const startButton = document.querySelector("#start");
 const startScreen = document.querySelector("#start-screen");
 const quizScreen = document.querySelector("#quiz-screen");
@@ -10,24 +9,29 @@ const answerThree = document.querySelector("#answerThree");
 const answerFour = document.querySelector("#answerFour");
 
 const quiz = codeQuestions;
-console.log(quiz);
 
+// EVENT LISTENERS
+// ready, steady, GO!
 startButton.addEventListener("click", function(event) {
     startScreen.setAttribute("class", "hide");
     startTheQuiz();
 });
 
+// listen to the displayed answers
 quizScreen.addEventListener("click", function(event) {
     if (event.target.className === "answer") {
         console.log(checkAnswer(event.target.textContent));
     }   
 });
 
+// startTheQuiz: change the quiz from hidden class and start asking
 function startTheQuiz() {
     quizScreen.setAttribute("class", "start");
     askQuestion();
 }
 
+// askQuestion: choose a question object at random from the array
+// TODO shuffle the quiz to start and pop questions so none is asked twice
 function askQuestion(){
     let question = chooseQuestion();
     showQuestion(question);
@@ -36,14 +40,13 @@ function askQuestion(){
 function chooseQuestion() {
     return quiz[getRandomIndex(quiz.length)];
 }
-// rnd: generate a random integer in the range 0 to length-1.
+// randomIndex: generate a random integer in the range 0 to length-1.
 function getRandomIndex(length) {
     return Math.floor(Math.random()*(length));
 }
-// shuffle: shuffle the elements of an array 
+// shuffleArray: shuffle the elements of an array 
 function shuffleArray(anArray) {
-    const iterations = anArray.length;
-    for (index=0;index<iterations;index++) {
+    for (index=0; index<anArray.length; index++) {
         let randomIndex = getRandomIndex(anArray.length);
         console.log("index = " + index + " randomIndex = " + randomIndex);
         [anArray[index], anArray[randomIndex]] = [anArray[randomIndex], anArray[index]];
