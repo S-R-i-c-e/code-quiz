@@ -1,0 +1,94 @@
+:root {
+  --primary-color: burlyWood;
+  --secondary-color: cornflowerBlue;
+  --tertiary-color: thistle;
+  --hover-color: aqua;
+  --primary-text-color: black;
+  --error-text-color: red;
+  --primary-font: VT323, "Roboto Slab", Consolas, 'Courier New', Courier, monospace;
+  --secondary-font: "Roboto Slab", Consolas, 'Courier New', Courier, monospace;
+  --std-border-radius: 0.25rem;  
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0px;
+}
+
+body {
+  background-color: var(--primary-color);
+  font-family: var(--primary-font);
+  font-size: 125%;
+}
+
+button {
+  background-color: var(--secondary-color);
+  border-radius: 5px;
+  cursor: grab;
+  font-family: var(--secondary-font);
+  font-size: 100%;
+  color: var(--tertiary-color);
+  margin: 5px;
+  padding: 10px;
+}
+
+button:hover {
+  background-color: var(--hover-color);
+}
+
+header {
+  height: 3rem;
+}
+
+input[type="text"] {
+  font-family: var(--secondary-font);
+  font-size: 100%;
+}
+
+ul {
+  padding-left: 0px;
+  max-height: 400px;
+  overflow: auto;
+}
+
+li {
+  padding: 8px;
+  font-size: 125%;
+  list-style: none;
+}
+
+li:hover {
+  background-color: var(--hover-color);
+}
+
+.wrapper {
+  display: flexbox;
+  flex-direction: column;
+  margin: 100px auto 0 auto;
+}
+
+.score {
+  font-size: 150%;
+  padding: 1rem;
+}
+.timer {
+  font-size: 150%;
+  padding: 1rem;
+}
+.choices button {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.start {
+  text-align: center;
+}
+
+#answer-verdict {
+  background-color: var(--hover-color);
+  color: var(--error-text-color);
+  font-size: 150%;
+}

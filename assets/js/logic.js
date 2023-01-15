@@ -26,6 +26,7 @@ let timer = 50;                 // 50 seconds
 startButton.addEventListener("click", function(event) {
     hideScreen(startScreen);
     startTheQuiz();
+
 });
 // listen to the displayed answers - send the given answer for processing
 quizScreen.addEventListener("click", function(event) {
@@ -81,7 +82,9 @@ function endGame() {
 // askQuestion: pop a question...object off the randomized array of questions
 function askQuestion() {  
     let question = quiz.pop();     // the questions are pre-mixed
-    showQuestion(question);
+    if (question) {
+        showQuestion(question);
+    }
 }
 // processAnswer: check the answer -  right - inc. score, wrong dec. time
 function processAnswer(givenAnswer) {
@@ -133,15 +136,18 @@ function incrementScore() {
 // HI-SCORE FUNCTIONS
 // processScore: add to table, and back to start screen
 function processScore() {
-    let hiScore={                                   // this hi-score entry               
-        initials: initialsEntryEl.value,
-        score: score
-    }   
-    let hiScoreTable = retrieve("Hi-Scores");
-    hiScoreTable = hiScoreTable.concat(hiScore);    // append current score to table
-    store("Hi-Scores", hiScoreTable);
-    hideScreen(endScreen);
-    showScreen(startScreen);
+    let textInput = initialsEntryEl.value.trim().slice(0,3); // strip ws and take first three chars only
+    if (textInput) {
+        let hiScore={                                   // this hi-score entry               
+            initials: textInput,
+            score: score
+        }   
+        let hiScoreTable = retrieve("Hi-Scores");
+        hiScoreTable = hiScoreTable.concat(hiScore);    // append current score to table
+        store("Hi-Scores", hiScoreTable);
+        hideScreen(endScreen);
+        showScreen(startScreen);
+    }
 }
 // GENERIC FUNCTIONS
 // randomIndex: generate a random integer in the range 0 to length-1.

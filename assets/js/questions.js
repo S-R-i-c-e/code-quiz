@@ -45,5 +45,11 @@ const codeQuestions = [
         dummy1: "Java Script Operator Name",
         dummy2: "Java Script Object Name",
         dummy3: "Java Script Operator Notation"
+    },
+    {   question: "API: What does CHEESE stand for?",
+        answer: "Nothing - i made it up for a joke",
+        dummy1: "Crisp Heuristic Easiness",
+        dummy2: "C language mouse heep",
+        dummy3: "Crappy Horrible Elementary Something"
     }
 ]
