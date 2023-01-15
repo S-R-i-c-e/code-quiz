@@ -1,11 +1,16 @@
 // CONSTANT AND VARIABLE DECLERATIONS
 // name the html element handles
 const startButton = document.querySelector("#start");
+const initialsButton = document.querySelector("#submit");
 const startScreen = document.querySelector("#start-screen");
 const quizScreen = document.querySelector("#quiz-screen");
+const endScreen = document.querySelector("#end-screen");
 const questionEl = document.querySelector("#question-title");
+const verdictEl = document.querySelector("#answer-verdict");
 const answerList = document.querySelector("#answer-list");
 const scoreEl = document.querySelector("#score");
+const initialsEntryEl = document.querySelector("#initials");
+const finalScoreEl = document.querySelector("#final-score");
 const timerEl = document.querySelector("#time");
 // time is constant
 const ONE_SECOND = 1000; // (ms)
@@ -23,14 +28,17 @@ startButton.addEventListener("click", function(event) {
     startTheQuiz();
 });
 
-// listen to the displayed answers
+// listen to the displayed answers - send the given answer for processing
 quizScreen.addEventListener("click", function(event) {
     if (event.target.className === "answer") {
-        if (isAnswerCorrect(event.target.textContent)) {
-            incrementScore();
-        };
-        askQuestion();
-    }   
+        clearVerdict();                             // clears the previous answer verdict in case you have beaten the timer to it
+        processAnswer(event.target.textContent);
+    } 
+});
+
+initialsButton.addEventListener("click", function(event) {
+    event.preventDefault();
+    processScore();
 });
 // TIMING FUNCTIONS
 // startTiming: show the timer and start creating time events
@@ -46,7 +54,6 @@ function updateTimer() {
         window.clearInterval(timeHandle);
         endGame();
     }
-
 }
 // CODE-QUIZ FUNCTIONS
 // startTheQuiz: change the quiz from hidden class and start asking
@@ -55,14 +62,34 @@ function startTheQuiz() {
     startTiming();
     askQuestion();
 }
+// endGame: show clear the question, show the end screen
 function endGame() {
     quizScreen.setAttribute("class", "hide");
-    
+    endScreen.setAttribute("class", "start");
+    finalScoreEl.textContent = score;
 }
 // askQuestion: pop a question object off the random array of questions
 function askQuestion() {  
     let question = quiz.pop();     // the questions are pre-mixed
     showQuestion(question);
+}
+function processAnswer(givenAnswer) {
+    if (isAnswerCorrect(givenAnswer)) {
+        incrementScore();
+        answerVerdict("Correct!");
+    } else {
+        answerVerdict("Wrong");
+    }
+    askQuestion();
+}
+function answerVerdict(verdict) {
+    verdictEl.textContent = verdict;
+    verdictEl.setAttribute("class", "start");
+    window.setTimeout(clearVerdict, ONE_SECOND); // pause for a second
+}
+function clearVerdict() {
+    verdictEl.textContent = "";
+    verdictEl.setAttribute("class", "hide");
 }
 // put the possible question answers into an array and call shuffle on it
 function mixAnswers(questionObject) {
@@ -88,6 +115,11 @@ function mixAnswers(questionObject) {
 function incrementScore() {
     score = score + 1;
     scoreEl.textContent = score;
+}
+// HI-SCORE FUNCTIONS
+// processScore: store, show the table
+function processScore() {
+    console.log(initialsEntryEl.value);
 }
 // GENERIC FUNCTIONS
 // randomIndex: generate a random integer in the range 0 to length-1.

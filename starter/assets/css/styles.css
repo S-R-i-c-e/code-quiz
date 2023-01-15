@@ -1,4 +1,5 @@
 body {
+  background-color: bisque;
   font-family: Arial;
   font-size: 120%;
 }
@@ -27,7 +28,7 @@ button {
 }
 
 button:hover {
-  background-color: #8570a5;
+  background-color: rosybrown;
 }
 
 h2 {
@@ -54,7 +55,7 @@ li {
 }
 
 li:hover {
-  background-color: #8570a5;
+  background-color: rosybrown;
 }
 
 .wrapper {

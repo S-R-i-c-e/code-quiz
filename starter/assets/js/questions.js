@@ -1,7 +1,7 @@
 // conversion of a set of question object answers to an array...
 // requires knowing the start end indicies in all their majesty.
 const questionObjectAnswerStartIndex = 1;
-const questionObjectAnswerEndIndex = 5; // TODO find out why this works
+const questionObjectAnswerEndIndex = 5;
 // the quiz is an array of question objects.
 const codeQuestions = [
     {   question: "Naming convention: Which is best practice when naming JS variables?",
