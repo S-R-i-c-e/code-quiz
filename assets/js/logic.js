@@ -12,6 +12,9 @@ const scoreEl = document.querySelector("#score");
 const initialsEntryEl = document.querySelector("#initials");
 const finalScoreEl = document.querySelector("#final-score");
 const timerEl = document.querySelector("#time");
+// Sounds for good and bad
+const joySound = new Audio("./assets/sfx/correct.wav");
+const sadSound = new Audio("./assets/sfx/incorrect.wav");
 // time is constant
 const ONE_SECOND = 1000; // (ms)
 // quiz is the code questions array defined in questions.js file
@@ -84,14 +87,18 @@ function askQuestion() {
     let question = quiz.pop();     // the questions are pre-mixed
     if (question) {
         showQuestion(question);
+    } else {
+        endGame();
     }
 }
 // processAnswer: check the answer -  right - inc. score, wrong dec. time
 function processAnswer(givenAnswer) {
     if (isAnswerCorrect(givenAnswer)) {
+        joySound.play();
         incrementScore();
         answerVerdict("Correct!");
     } else {
+        sadSound.play();
         decreaseTime(10);
         answerVerdict("Wrong - 10 seconds subtracted");
     }

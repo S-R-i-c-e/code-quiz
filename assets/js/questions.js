@@ -47,9 +47,45 @@ const codeQuestions = [
         dummy3: "Java Script Operator Notation"
     },
     {   question: "API: What does CHEESE stand for?",
-        answer: "Nothing - i made it up for a joke",
+        answer: "Cryogenic Hydrogen EESE",
         dummy1: "Crisp Heuristic Easiness",
-        dummy2: "C language mouse heep",
-        dummy3: "Crappy Horrible Elementary Something"
+        dummy2: "C language mouse heap",
+        dummy3: "Clean Happy Elementary Spatial"
+    },
+    {   question: "Which is JavaScript data type?",
+        answer: "Symbol",
+        dummy1: "Time",
+        dummy2: "Array",
+        dummy3: "Char"
+    },
+    {   question: "Which is not a JavaScript data type?",
+        answer: "Array",
+        dummy1: "Object",
+        dummy2: "undefined",
+        dummy3: "null"
+    },
+    {   question: "Which is feature of JavaScript?",
+        answer: "interpreted",
+        dummy1: "compiled",
+        dummy2: "purely functional",
+        dummy3: "scaleable concurrency"
+    },
+    {   question: "Is JavaScript type-sensitive?",
+        answer: "yes",
+        dummy1: "no",
+        dummy2: "yes and no",
+        dummy3: "sometimes"
+    },
+    {   question: "Which method does not access HTML elements?",
+        answer: "getElementHTML('HTMLname')",
+        dummy1: "getElementByID('idname')",
+        dummy2: "getElementByTagName('tagname')",
+        dummy3: "querySelector('css-selector')"
+    },
+    {   question: "Which is not an option for JavaScript code location?",
+        answer: "outline",
+        dummy1: "inline",
+        dummy2: "external",
+        dummy3: "internal"
     }
 ]
