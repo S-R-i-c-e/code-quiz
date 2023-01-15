@@ -19,7 +19,7 @@ let quiz = shuffleArray(codeQuestions);   // pre-mix the questions
 let timeHandle = undefined;
 // variables required by code-quiz
 let score = 0;
-let timer = 10;                 // 10 seconds
+let timer = 50;                 // 10 seconds
 
 // EVENT LISTENERS
 // to start the quiz
@@ -27,7 +27,6 @@ startButton.addEventListener("click", function(event) {
     startScreen.setAttribute("class", "hide");
     startTheQuiz();
 });
-
 // listen to the displayed answers - send the given answer for processing
 quizScreen.addEventListener("click", function(event) {
     if (event.target.className === "answer") {
@@ -35,34 +34,38 @@ quizScreen.addEventListener("click", function(event) {
         processAnswer(event.target.textContent);
     } 
 });
-
+// listen for initials entered
 initialsButton.addEventListener("click", function(event) {
     event.preventDefault();
     processScore();
 });
 // TIMING FUNCTIONS
-// startTiming: show the timer and start creating time events
+// startTiming: show the main quiz timer and start creating time events
 function startTiming() {
     timerEl.textContent = timer;
     timeHandle = window.setInterval(updateTimer, ONE_SECOND);
 }
 // updateTimer: update timer ands check if time has run out
 function updateTimer() {
-    timer = timer - 1;
-    timerEl.textContent = timer; 
-    if (timer === 0) {
-        window.clearInterval(timeHandle);
-        endGame();
+    decreaseTime(1);                        // one second
+    timerEl.textContent = timer;            // show updated timer
+    if (timer <= 0) {                      // if time has run out
+        window.clearInterval(timeHandle);   // stop the timer
+        endGame();                          // end the fun
     }
+}
+function decreaseTime(decrement) {
+    timer = timer - decrement;
 }
 // CODE-QUIZ FUNCTIONS
 // startTheQuiz: change the quiz from hidden class and start asking
 function startTheQuiz() {
-    quizScreen.setAttribute("class", "start");  // TODO - arcane
+    quizScreen.setAttribute("class", "start");
+    store("Hi-Scores", retrieve("Hi-Scores") || []); // initialize Hi_scores first time ever
     startTiming();
     askQuestion();
 }
-// endGame: show clear the question, show the end screen
+// endGame: clear the question, show the end screen
 function endGame() {
     quizScreen.setAttribute("class", "hide");
     endScreen.setAttribute("class", "start");
@@ -73,20 +76,24 @@ function askQuestion() {
     let question = quiz.pop();     // the questions are pre-mixed
     showQuestion(question);
 }
+// processAnswer: check the answer -  right - inc. score, wrong dec. time
 function processAnswer(givenAnswer) {
     if (isAnswerCorrect(givenAnswer)) {
         incrementScore();
         answerVerdict("Correct!");
     } else {
-        answerVerdict("Wrong");
+        decreaseTime(10);
+        answerVerdict("Wrong - 10 seconds subtracted");
     }
     askQuestion();
 }
+// answerVerdict: displays right or wrong to the user
 function answerVerdict(verdict) {
     verdictEl.textContent = verdict;
     verdictEl.setAttribute("class", "start");
     window.setTimeout(clearVerdict, ONE_SECOND); // pause for a second
 }
+// clearVerdict: clear the right/wrong display
 function clearVerdict() {
     verdictEl.textContent = "";
     verdictEl.setAttribute("class", "hide");
@@ -117,9 +124,17 @@ function incrementScore() {
     scoreEl.textContent = score;
 }
 // HI-SCORE FUNCTIONS
-// processScore: store, show the table
+// processScore: store, i.e. add to table, and back to start screen
 function processScore() {
-    console.log(initialsEntryEl.value);
+    let hiScore={                                   // this hi-score entry               
+        initials: initialsEntryEl.value,
+        score: score
+    }   
+    let hiScoreTable = retrieve("Hi-Scores");
+    hiScoreTable = hiScoreTable.concat(hiScore);    // append current score to table
+    store("Hi-Scores", hiScoreTable);
+    endScreen.setAttribute("class", "hide");        // close end-game screen
+    startScreen.setAttribute("class", "start");     // reopen start screen
 }
 // GENERIC FUNCTIONS
 // randomIndex: generate a random integer in the range 0 to length-1.
@@ -133,4 +148,11 @@ function shuffleArray(anArray) {
         [anArray[index], anArray[randomIndex]] = [anArray[randomIndex], anArray[index]];
     }
     return anArray;
+}
+// set and get local storage
+function store(storageName, obj) {
+    localStorage.setItem(storageName, JSON.stringify(obj));    
+}
+function retrieve(storageName) {
+    return JSON.parse(localStorage.getItem(storageName));
 }

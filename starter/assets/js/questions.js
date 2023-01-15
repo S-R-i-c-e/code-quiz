@@ -38,6 +38,12 @@ const codeQuestions = [
         answer: "Emmentel",
         dummy1: "rennet",
         dummy2: "toe nails",
-        dummy3: "sturgeon"
+        dummy3: "leaning"
+    },
+    {   question: "API: What does JSON stand for?",
+        answer: "Java Script Object Notation",
+        dummy1: "Java Script Operator Name",
+        dummy2: "Java Script Object Name",
+        dummy3: "Java Script Operator Notation"
     }
 ]

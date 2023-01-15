@@ -71,6 +71,9 @@ li:hover {
   text-align: center;
 }
 
+.start .hide {
+  height: 500px;
+}
 .scores {
   position: absolute;
   top: 10px;
